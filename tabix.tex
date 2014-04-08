@@ -57,12 +57,30 @@
 \cline{4-7}
  & & & {\tt cnk\_end} & Virtual file offset of the end of the chunk & {\tt uint64\_t} & \\
 \cline{2-7}
+  & \multicolumn{6}{c|}{\textcolor{gray}{\it Optional dummy entry for stats (included in n\_bin)}} \\
+\cline{3-7}
+  & & \multicolumn{2}{l|}{\sf bin} & Dummy bin number & {\tt uint32\_t} & 37450 \\
+\cline{3-7}
+  & & \multicolumn{2}{l|}{\sf n\_chunk} & \# chunks & {\tt int32\_t} & 2 \\
+\cline{3-7}
+  & & \multicolumn{5}{c|}{\textcolor{gray}{\it First chunk for dummy bin}} \\
+\cline{4-7}
+  & & & {\sf unmapped\_beg} & (Virtual) file offset of the start of unmapped but placed & {\tt uint64\_t} & \\
+\cline{4-7}
+  & & & {\sf unmapped\_end} & (Virtual) file offset of the end of unmapped but placed & {\tt uint64\_t} & \\
+\cline{4-7}
+  & & \multicolumn{5}{c|}{\textcolor{gray}{\it Second chunk for dummy bin}} \\
+\cline{4-7}
+  & & & {\sf mapped\_count} & Number of mapped read-segments for this reference & {\tt uint64\_t} & \\
+\cline{4-7}
+  & & & {\sf unmapped\_count} & Number of unmapped read-segments for this reference & {\tt uint64\_t} & \\
+\cline{2-7}
  & \multicolumn{3}{l|}{\tt n\_intv} & \# 16kb intervals (for the linear index) & {\tt int32\_t} & \\
 \cline{2-7}
  & \multicolumn{6}{c|}{\textcolor{gray}{\it List of distinct intervals (n=n\_intv)}} \\
 \cline{3-7}
  & & \multicolumn{2}{l|}{\tt ioff} & File offset of the first record in the interval & {\tt uint64\_t} & \\\cline{1-7}
-\multicolumn{4}{|l|}{\sf n\_no\_coor} & \# unmapped reads without coordinates set & {\tt uint64\_t} & \\
+\multicolumn{4}{|l|}{\sf n\_no\_coor} & (Optional) \# unmapped reads without coordinates set & {\tt uint64\_t} & \\
 \hline
 \end{tabular}
 \end{center}

@@ -982,7 +982,7 @@ saved.
   & & & {\sf chunk\_beg} & (Virtual) file offset of the start of the chunk & {\tt uint64\_t} & \\\cline{4-7}
   & & & {\sf chunk\_end} & (Virtual) file offset of the end of the chunk & {\tt uint64\_t} & \\
   \cline{3-7}
-  & \multicolumn{6}{c|}{\textcolor{gray}{\it Optional dummy entry for idxstats (included in n\_bin)}} \\\cline{3-7}
+  & \multicolumn{6}{c|}{\textcolor{gray}{\it Optional dummy entry for stats (included in n\_bin)}} \\\cline{3-7}
   & & \multicolumn{2}{l|}{\sf bin} & Dummy bin number & {\tt uint32\_t} & 37450 \\\cline{3-7}
   & & \multicolumn{2}{l|}{\sf n\_chunk} & \# chunks & {\tt int32\_t} & 2 \\\cline{3-7}
   & & \multicolumn{5}{c|}{\textcolor{gray}{\it First chunk for dummy bin}} \\\cline{4-7}
@@ -1000,13 +1000,13 @@ saved.
 \end{tabular}}
 \end{table}
 
-Samtools 0.1.8 introduced the {\tt samtools idxstats} command producing a summary
-of the number of mapped and unmapped read-segments per reference, and any unmapped
-unplaced read-segments (see Section~\ref{sec-recommended-practice}).
-This uses additional fields recorded in the BAI file by {\tt samtools index}.
-These optional fields are two entries ({\sf n\_chunk} $= 2$) for each reference
-under an entry for dummy {\sf bin} $37450$, and the trailing {\sf unplaced\_count}
-field at the end of the file.
+The dummy bin allows tools that are capable of reading it to provide a summary of the number of
+mapped and unmapped read-segments per reference, and any unmapped unplaced read-segments 
+(see Section~\ref{sec-recommended-practice} for details on why unmapped reads can have a 
+position).  This is done by using additional fields recorded in the BAI file by the indexing tool in a bin 
+1 above the normal maximum bin number. These optional fields are two entries ({\sf n\_chunk} 
+$= 2$) for each reference indexed under the entry for dummy {\sf bin}, and the trailing 
+{\sf n\_no\_coor} field at the end of the file.
 
 \subsection{C source code for computing bin number and overlapping bins}\label{sec:code}
 
