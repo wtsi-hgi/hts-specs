@@ -18,6 +18,7 @@
 \author{The SAM/BAM Format Specification Working Group}
 \maketitle
 
+\section{Binary Format Definition}
 \begin{table}[ht]
 {\small
 \begin{tabular}{|l|l|l|l|l|l|r|}
@@ -52,6 +53,7 @@
 \end{tabular}}
 \end{table}
 
+\section{Dummy Bin}
 The number of the dummy bin varies according to the depth of the binning index and can be
 calculated by:
 
@@ -67,6 +69,18 @@ in a bin 1 above the normal maximum bin number. These optional fields are two en
 ({\sf n\_chunk} $= 2$) for each reference indexed under the entry for dummy {\sf bin}, and the 
 trailing {\sf n\_no\_coor} field at the end of the file.
 
+\section{Virtual Offsets}
+BGZF files support random access through the CSI file index.
+To achieve this, the CSI file index uses virtual file offsets into the
+BGZF file. Each virtual file offset is an unsigned 64-bit integer, defined
+as: coffset<<16|uoffset, where coffset is an unsigned byte offset into
+the BGZF file to the beginning of a BGZF block, and uoffset is an
+unsigned byte offset into the uncompressed data stream represented
+by that BGZF block. Virtual file offsets can be compared, but
+subtraction between virtual file offsets and addition between a virtual
+offset and an integer are both disallowed.
+
+\section{Calculation of Bin Number}
 
 {\footnotesize
 \begin{verbatim}

@@ -90,6 +90,15 @@
 \begin{itemize}
 \item The index file is BGZF compressed.
 \item All integers are little-endian.
+\item BGZF files support random access through the tabix file index.
+To achieve this, the tabix file index uses virtual file offsets into the
+BGZF file. Each virtual file offset is an unsigned 64-bit integer, defined
+as: coffset<<16|uoffset, where coffset is an unsigned byte offset into
+the BGZF file to the beginning of a BGZF block, and uoffset is an
+unsigned byte offset into the uncompressed data stream represented
+by that BGZF block. Virtual file offsets can be compared, but
+subtraction between virtual file offsets and addition between a virtual
+offset and an integer are both disallowed.
 \item When {\tt (format\&0x10000)} is true, the coordinate follows the
   {\tt BED} rule (i.e. half-closed-half-open and zero based); otherwise,
   the coordinate follows the {\tt GFF} rule (closed and one based).
